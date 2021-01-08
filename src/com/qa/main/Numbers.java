@@ -23,37 +23,127 @@ public class Numbers {
 	    
 	}
 	
-	public String stringRepresentingNumber() {
+	
+	
 		//Create a second method that when given the number 1-99 returns a String representation of this number, 
 		// for example 1 = one, 11 = eleven, 21 = twenty-one.
 		String textValue = "";
 		
-		String one = "one";
-		String two = "two";
-		String three = "three";
-		String four = "four";
-		String five = "five";
-		String six = "six";
-		String seven = "seven";
-		String eight = "eight";
-		String nine = "nine";
-		String ten = "ten";
-		String eleven = "eleven";
-		String twelve = "twelve";
-		String thirteen = "thirteen";
-		String fourteen = "fourteen";
-		String fifteen = "fifteen";
-		String sixteen = "sixteen";
-		String seventeen = "seventeen";
-		String eighteen = "eighteen";
-		String nineteen = "nineteen";
+		String[] oneTeens = {"", "one", "two", "three", "four", "five", "six", "seven", "eight", "nine", "ten", "eleven", "twelve", "thirteen", "fourteen", "fifteen", "sixteen", "seventeen", "eighteen", "nineteen"};
+		
+		String[] tens = {"", "ten", "twenty", "thirty", "fourty", "fifty", "sixty", "seventy", "eighty", "ninety", ""};
+		
+		String hundred = "hundred";
+		
+		String thousand = "thousand";
 		
 		
+		public static String changeToString(int value) {
+			
+			String stringValue = "";
+			
+			stringValue = stringValue + value;
+			
+			return stringValue;
+			
+		}
 		
+		public static int stringLength(int value) {
+			
+			int length = 0;
+			
+			String output = changeToString(value);
+			
+			length = output.length();
+			
+			return length;
+			
+		}
 		
-		return textValue;
+		public static int getCharacter(int value, int nChar) {
+			
+			int converted = 0;
+			
+			String stringValue = changeToString(value);
+			
+			char charOutValue = stringValue.charAt(nChar);
+			
+			converted = Character.getNumericValue(charOutValue);
+			
+			return converted;
+			
+		}
 		
-	}
+		public String numTransition(int value) {
+			
+			String numberTran = "";
+			int nOnes = 0;
+			int nTens = 0;
+			int nHundreds = 0;
+			int nThousands = 0;
+			
+			if(value <= 19) {
+				
+				numberTran = oneTeens[value];
+				
+			}else if (stringLength(value) == 2){
+				
+				nOnes = getCharacter(value, 1);
+				numberTran = oneTeens[nOnes];
+				
+				nTens = getCharacter(value, 0);
+				numberTran = tens[nTens] + " " + numberTran;
+				
+			} else if (stringLength(value) == 3) {
+				
+				nOnes = getCharacter(value, 2);
+				numberTran = oneTeens[nOnes];
+				
+				nTens = getCharacter(value, 1);
+				numberTran = tens[nTens] + " " + numberTran;
+				
+				nHundreds = getCharacter(value, 0);
+				numberTran = oneTeens[nHundreds] + " " + hundred + " " + numberTran;
+				
+			} else if (stringLength(value) == 4) {
+				
+				nOnes = getCharacter(value, 3);
+				numberTran = oneTeens[nOnes];
+				
+				nTens = getCharacter(value, 2);
+				numberTran = tens[nTens] + " " + numberTran;
+				
+				nHundreds = getCharacter(value, 1);
+				numberTran = oneTeens[nHundreds] + " " + hundred + " " + numberTran;
+				
+				nThousands = getCharacter(value, 0);
+				numberTran = oneTeens[nThousands] + " " + thousand + " " + numberTran;
+				
+			}
+			
+			
+			
+			return numberTran;
+			
+		}
+		
+		public void countToHundreds() {
+			
+			for (int i = 1; i <= 100; i++) {
+				
+				System.out.println(numTransition(i));
+			}
+			
+		}
+		
+		public void countToThousands() {
+			
+			for (int i = 1; i <= 9999 ; i++) {
+
+				System.out.println(numTransition(i));
+			}
+			
+		}
 	
 	
 	
